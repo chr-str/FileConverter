@@ -3,6 +3,7 @@ document.getElementById('fileInput').addEventListener('change', handleFileChange
 function handleFileChange() {
     const fileInput = document.getElementById('fileInput');
     const previewContent = document.getElementById('previewContent');
+    const previewSection = document.getElementById('previewSection');
 
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
@@ -14,16 +15,25 @@ function handleFileChange() {
             const originalFileName = file.name.replace(/\.[^/.]+$/, ""); // Entfernt die Dateiendung
             const newFileName = `${originalFileName}_konvertiert.csv`;
 
-            // Zeige die ersten 3 Zeilen der konvertierten CSV-Datei in der Vorschau an
-            const previewText = getPreviewContent(convertedContent, 3);
-            previewContent.innerText = previewText;
+            // Zähle die Anzahl der Zeilen in der konvertierten CSV-Datei
+            const numLines = getNumberOfLines(convertedContent);
 
-            
+            // Zeige die Anzahl der Zeilen und die Vorschau an
+            previewContent.innerHTML = `<strong>Vorschau der ersten drei Zeilen zur Überprüfung:</strong><br><br>${getPreviewContent(convertedContent, 3)}`;
+
+            // Falls mehr als drei Zeilen vorhanden sind, füge "..." hinzu
+            if (numLines > 3) {
+                previewContent.innerHTML += '...';
+                previewContent.innerHTML += `<br>Die Datei enthält insgesamt ${numLines} Zeilen.`;
+            }
+
+            previewSection.style.display = 'block';
         };
 
         reader.readAsText(file);
     }
 }
+
 
 function convertFile() {
     const fileInput = document.getElementById('fileInput');
@@ -70,4 +80,10 @@ function getPreviewContent(content, numLines) {
     // Extrahiere die ersten 'numLines' Zeilen aus dem Inhalt
     const lines = content.split('\n').slice(0, numLines);
     return lines.join('\n');
+}
+
+function getNumberOfLines(content) {
+    // Zähle die Anzahl der Zeilen im Inhalt
+    const lines = content.split('\n');
+    return lines.length;
 }
