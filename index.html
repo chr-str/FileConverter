@@ -15,8 +15,12 @@
 
         #fileInputContainer {
             display: flex;
+            border: 1px solid black;
+            background-color: aliceblue;
             align-items: center;
-            margin-top: 20px;
+            padding: 5px;
+            margin-top: 5px;
+            
         }
 
         #fileInputLabel {
@@ -55,10 +59,14 @@
         
     </div>
 
+    <br>
+
     <div id="fileInputContainer">
         <label for="fileInput" id="fileInputLabel">Hochladen:</label>
         <input type="file" id="fileInput" accept=".csv">
     </div>
+    
+    <br>
     
     <div id="previewSection">
         <pre id="previewContent">Noch keine Datei hochgeladen</pre>
