@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Converter</title>
+</head>
+<body>
+    <h1>CSV Converter</h1>
+    
+    <input type="file" id="fileInput" accept=".csv">
+    <br>
+    <label for="separator">Select New Separator:</label>
+    <select id="separator">
+        <option value=";">Semicolon (;)</option>
+        <option value=",">Comma (,)</option>
+        <!-- Add more options based on your needs -->
+    </select>
+    <br>
+    <button onclick="convertFile()">Convert and Download</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
