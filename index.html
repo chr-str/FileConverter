@@ -4,15 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datei-Konverter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #fileInputContainer {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #fileInputLabel {
+            margin-right: 10px;
+        }
+
+        #fileInput {
+            margin-right: 10px;
+        }
+
+        #conversionBox {
+            background-color: aliceblue;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        #previewSection {
+            margin-top: 20px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Datei-Konverter</h1>
     
-    <p>Dieses Programm nimmt eine CSV-Datei entgegen, in der die einzelnen Werte mit "|" (Pipe) getrennt sind, und ändert das Trennzeichen in ";" (Semikolon). Fügen Sie Ihre Datei mit "Hochladen" hinzu und klicken Sie auf "Konvertieren und Herunterladen".</p>
+    <div id="conversionBox">
+        <p>Dieses Programm nimmt eine CSV-Datei entgegen, in der die einzelnen Werte mit "|" (Pipe) getrennt sind, und ändert das Trennzeichen in ";" (Semikolon).</p>
+        <p>Fügen Sie Ihre Datei mit "Hochladen" hinzu und klicken Sie auf "Konvertieren und Herunterladen".</p>
+    </div>
 
-    <input type="file" id="fileInput" accept=".csv">
-    <br>   
-    <button onclick="convertFile()">Hochladen</button>
+    <div id="fileInputContainer">
+        <label for="fileInput" id="fileInputLabel">Hochladen:</label>
+        <input type="file" id="fileInput" accept=".csv">
+    </div>
+    
+    <div id="previewSection">
+        <b>Vorschau - erste drei Zeilen der konvertierten Datei:</b>
+        <pre id="previewContent">Noch keine Datei hochgeladen</pre>
+    </div>
+    
     <button onclick="convertFile()">Konvertieren und Herunterladen</button>
 
     <script src="script.js"></script>
