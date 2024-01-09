@@ -16,10 +16,12 @@
         #fileInputContainer {
             display: flex;
             border: 1px solid black;
-            background-color: aliceblue;
+            background-color: rgb(249, 232, 170);
             align-items: center;
             padding: 5px;
             margin-top: 5px;
+            border-radius: 5px;
+            
             
         }
 
@@ -33,15 +35,26 @@
 
         #conversionBox {
             background-color: aliceblue;
-            padding: 5px;
+            padding: 10px; /* Adjust the padding as needed */
             margin-top: 5px;
             border-radius: 5px;
+            cursor: pointer; /* Add cursor pointer for better indication of clickability */
+        }
+        
+        #instructions {
+            display: none;
+            margin-top: 10px; /* Add some margin to separate instructions from the header */
+        }
+        
+        #conversionMessage {
+            margin: 0; /* Remove default margin for better alignment */
         }
 
         #previewSection {
             margin-top: 20px;
             border: 1px solid black;
             padding: 10px;
+            border-radius: 5px;
         }
 
         button {
@@ -50,16 +63,38 @@
     </style>
 </head>
 <body>
-    <h1>Datei-Konverter</h1>
+    <h1>Dateikonverter - Trennzeichen ersetzen</h1>
     
-    <div id="conversionBox">
-        <p>Dieses Programm nimmt eine CSV-Datei entgegen, in der die einzelnen Werte mit "|" (Pipe) getrennt sind, und ändert das Trennzeichen in ";" (Semikolon).<br>
-        Fügen Sie Ihre Datei mit "Hochladen" hinzu und klicken Sie danach auf "Konvertieren und Herunterladen".
-        </p>
+    <hr>
+    <br>
+
+    <div id="conversionBox" onclick="toggleConversionBox()">
+        <p id="conversionMessage">Anleitung aufklappen (hier klicken)</p>
         
+        <div id="instructions" style="display: none;">
+            <p>Dieses Programm nimmt eine CSV-Datei entgegen, in der die einzelnen Werte mit "|" (Pipe) getrennt sind, und ändert das Trennzeichen in ein anderes Ihrer Wahl.</p>
+            <ul>
+                <li>Wählen Sie Ihr gewünschtes Ziel-Trennzeichen</li>
+                <li>Fügen Sie Ihre Datei mit "Hochladen" hinzu</li>
+                <li>Klicken Sie danach auf "Konvertieren und Herunterladen"</li>
+                <li>Laden Sie die Seite neu, um zum Ursprungszustand zurückzugelangen</li>
+            </ul>
+        </div>
     </div>
 
     <br>
+
+    <div id="delimiterSelection">
+        <label for="delimiter">Trennzeichen auswählen:</label>
+        <select id="delimiter" onchange="updateDelimiter()">
+            <option value=";">Semikolon (;)</option>
+            <option value=",">Komma (,)</option>
+        </select>
+    </div>
+
+    <br>
+
+
 
     <div id="fileInputContainer">
         <label for="fileInput" id="fileInputLabel">Datei Hochladen:</label>

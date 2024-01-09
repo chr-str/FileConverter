@@ -1,4 +1,11 @@
+let selectedDelimiter = ';'; // Default delimiter is semicolon
+
 document.getElementById('fileInput').addEventListener('change', handleFileChange);
+
+function updateDelimiter() {
+    const delimiterSelect = document.getElementById('delimiter');
+    selectedDelimiter = delimiterSelect.value;
+}
 
 function handleFileChange() {
     const fileInput = document.getElementById('fileInput');
@@ -38,6 +45,7 @@ function handleFileChange() {
 function convertFile() {
     const fileInput = document.getElementById('fileInput');
     const previewContent = document.getElementById('previewContent');
+    const previewSection = document.getElementById('previewSection');
 
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
@@ -49,12 +57,19 @@ function convertFile() {
             const originalFileName = file.name.replace(/\.[^/.]+$/, ""); // Entfernt die Dateiendung
             const newFileName = `${originalFileName}_konvertiert.csv`;
 
-            // Zeige die ersten 3 Zeilen der konvertierten CSV-Datei in der Vorschau an
-            const previewText = getPreviewContent(convertedContent, 3);
-            previewContent.innerText = previewText;
+            // Leere die Vorschau
+            previewContent.innerHTML = '';
+
+            // Zeige eine Nachricht an, dass die Datei konvertiert wurde
+            const conversionMessage = document.createElement('p');
+            conversionMessage.innerText = 'Datei konvertiert';
+            previewContent.appendChild(conversionMessage);
 
             // Führe den Download aus
             downloadFile(convertedContent, newFileName);
+
+            
+            
         };
 
         reader.readAsText(file);
@@ -63,9 +78,11 @@ function convertFile() {
     }
 }
 
+
 function convertCSV(content) {
-    // Ersetze "|" durch das Semikolon
-    return content.replace(/\|/g, ';');
+    // Ersetze "|" durch das ausgewählte Trennzeichen
+    const regex = new RegExp('\\|', 'g');
+    return content.replace(regex, selectedDelimiter);
 }
 
 function downloadFile(content, fileName) {
@@ -86,4 +103,16 @@ function getNumberOfNonEmptyLines(content) {
     // Zähle die Anzahl der nicht leeren Zeilen im Inhalt
     const lines = content.split('\n').filter(line => line.trim() !== ''); // Entferne Leerzeichen und filtere leere Zeilen
     return lines.length;
+}
+
+function toggleConversionBox() {
+    const instructions = document.getElementById('instructions');
+
+    if (instructions.style.display === 'none' || instructions.style.display === '') {
+        instructions.style.display = 'block';
+        document.getElementById('conversionMessage').innerText = 'Anleitung einklappen (hier klicken)';
+    } else {
+        instructions.style.display = 'none';
+        document.getElementById('conversionMessage').innerText = 'Anleitung aufklappen (hier klicken)';
+    }
 }
