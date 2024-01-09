@@ -116,3 +116,24 @@ function toggleConversionBox() {
         document.getElementById('conversionMessage').innerText = 'Anleitung aufklappen (hier klicken)';
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Run this function when the DOM is fully loaded
+
+    // Clear the file input field on page load
+    clearFileInput();
+
+    // Attach the change event listener to the file input
+    document.getElementById('fileInput').addEventListener('change', handleFileChange);
+});
+
+function clearFileInput() {
+    // Reset the value of the file input field
+    document.getElementById('fileInput').value = '';
+
+    // Reset the preview content
+    document.getElementById('previewContent').innerText = 'Noch keine Datei hochgeladen';
+
+    // Hide the preview section
+    document.getElementById('previewSection').style.display = 'none';
+}
