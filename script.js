@@ -23,7 +23,7 @@ function handleFileChange() {
 
             // Falls mehr als drei nicht leere Zeilen vorhanden sind, füge "..." hinzu
             if (numNonEmptyLines > 3) {
-                previewContent.innerHTML += '<br>...';
+                previewContent.innerHTML += '...';
                 previewContent.innerHTML += `<br>Die Datei enthält insgesamt ${numNonEmptyLines} Zeilen mit Werten.`;
             }
 
