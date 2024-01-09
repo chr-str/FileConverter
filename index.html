@@ -1,23 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSV Converter</title>
+    <title>Datei-Konverter</title>
 </head>
 <body>
-    <h1>CSV Converter</h1>
+    <h1>Datei-Konverter</h1>
     
+    <p>Dieses Programm nimmt eine CSV-Datei entgegen, in der die einzelnen Werte mit "|" (Pipe) getrennt sind, und ändert das Trennzeichen in ";" (Semikolon). Fügen Sie Ihre Datei mit "Hochladen" hinzu und klicken Sie auf "Konvertieren und Herunterladen".</p>
+
     <input type="file" id="fileInput" accept=".csv">
-    <br>
-    <label for="separator">Select New Separator:</label>
-    <select id="separator">
-        <option value=";">Semicolon (;)</option>
-        <option value=",">Comma (,)</option>
-        <!-- Add more options based on your needs -->
-    </select>
-    <br>
-    <button onclick="convertFile()">Convert and Download</button>
+    <br>   
+    <button onclick="convertFile()">Hochladen</button>
+    <button onclick="convertFile()">Konvertieren und Herunterladen</button>
 
     <script src="script.js"></script>
 </body>

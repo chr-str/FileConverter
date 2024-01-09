@@ -1,6 +1,5 @@
 function convertFile() {
     const fileInput = document.getElementById('fileInput');
-    const separator = document.getElementById('separator').value;
 
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
@@ -8,19 +7,21 @@ function convertFile() {
 
         reader.onload = function (e) {
             const content = e.target.result;
-            const convertedContent = convertCSV(content, separator);
-            downloadFile(convertedContent, 'converted_file.csv');
+            const convertedContent = convertCSV(content);
+            const originalFileName = file.name.replace(/\.[^/.]+$/, ""); // Entfernt die Dateiendung
+            const newFileName = `${originalFileName}_konvertiert.csv`;
+            downloadFile(convertedContent, newFileName);
         };
 
         reader.readAsText(file);
     } else {
-        alert('Please select a file.');
+        alert('Bitte wählen Sie eine Datei aus.');
     }
 }
 
-function convertCSV(content, newSeparator) {
-    // Replace "|" with the new separator
-    return content.replace(/\|/g, newSeparator);
+function convertCSV(content) {
+    // Ersetze "|" durch das Semikolon
+    return content.replace(/\|/g, ';');
 }
 
 function downloadFile(content, fileName) {
