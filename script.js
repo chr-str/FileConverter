@@ -15,16 +15,16 @@ function handleFileChange() {
             const originalFileName = file.name.replace(/\.[^/.]+$/, ""); // Entfernt die Dateiendung
             const newFileName = `${originalFileName}_konvertiert.csv`;
 
-            // Zähle die Anzahl der Zeilen in der konvertierten CSV-Datei
-            const numLines = getNumberOfLines(convertedContent);
+            // Zähle die Anzahl der nicht leeren Zeilen in der konvertierten CSV-Datei
+            const numNonEmptyLines = getNumberOfNonEmptyLines(convertedContent);
 
             // Zeige die Anzahl der Zeilen und die Vorschau an
             previewContent.innerHTML = `<strong>Vorschau der ersten drei Zeilen zur Überprüfung:</strong><br><br>${getPreviewContent(convertedContent, 3)}`;
 
-            // Falls mehr als drei Zeilen vorhanden sind, füge "..." hinzu
-            if (numLines > 3) {
-                previewContent.innerHTML += '...';
-                previewContent.innerHTML += `<br>Die Datei enthält insgesamt ${numLines} Zeilen.`;
+            // Falls mehr als drei nicht leere Zeilen vorhanden sind, füge "..." hinzu
+            if (numNonEmptyLines > 3) {
+                previewContent.innerHTML += '<br>...';
+                previewContent.innerHTML += `<br>Die Datei enthält insgesamt ${numNonEmptyLines} Zeilen mit Werten.`;
             }
 
             previewSection.style.display = 'block';
@@ -82,8 +82,8 @@ function getPreviewContent(content, numLines) {
     return lines.join('\n');
 }
 
-function getNumberOfLines(content) {
-    // Zähle die Anzahl der Zeilen im Inhalt
-    const lines = content.split('\n');
+function getNumberOfNonEmptyLines(content) {
+    // Zähle die Anzahl der nicht leeren Zeilen im Inhalt
+    const lines = content.split('\n').filter(line => line.trim() !== ''); // Entferne Leerzeichen und filtere leere Zeilen
     return lines.length;
 }
