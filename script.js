@@ -134,6 +134,5 @@ function clearFileInput() {
     // Reset the preview content
     document.getElementById('previewContent').innerText = 'Noch keine Datei hochgeladen';
 
-    // Hide the preview section
-    document.getElementById('previewSection').style.display = 'none';
+    
 }
